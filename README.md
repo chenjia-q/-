@@ -1,27 +1,3 @@
-抖音电商用户分层与画像分析
-本代码实现了基于用户行为数据的 RFM 分层、生命周期阶段识别、多维度画像对比及可视化分析。通过对用户年龄、性别、地区、消费能力、活跃度等特征进行加工，构建了 5 类宏观分层（核心用户、重要用户、潜力用户、一般用户、流失用户）以及 6 类生命周期标签（新用户、成长期、成熟期、预流失、流失、未知），并输出完整的用户标签表。
-
-1. 数据预处理
-读取 user_personalized_features.csv
-
-删除无用列（Unnamed:0、Unnamed:0.1）
-
-检查并确认无重复值与缺失值
-
-将数值列转换为 numeric 类型，将订阅字段转为布尔型，将文本类别字段转为 category 类型
-
-2. 基础属性标签构建
-标签	构造方法
-年龄段 (Age_Band)	将 Age 划分为 18-24、25-34、35-44、45-150
-性别标准化 (Gender_Std)	Male→男，Female→女性别标准化 (Gender_Std)	Male→男，Female→女
-消费能力标签 (Spending_Ability_Tag)	基于 Average_Order_Value 的三分位（低/中/高）
-购买力标签 (Purchasing_Power_Tag)	基于 Total_Spending 的三分位（低/中/高）
-3. 生命周期阶段识别
-根据 Last_Login_Days_Ago（最近登录天数 R）和 Purchase_Frequency（购买频次 F）定义：
-
-阶段	条件
-新用户-14天内	F == 1 且 R ≤ 14
-成熟期	R ≤ 7 且 F ≥ 5
 🛒 抖音电商用户分层与画像分析
 基于用户行为数据的 RFM 分层、生命周期识别、多维度画像对比及可视化分析。
 最终输出完整的用户标签表，支持精细化运营、流失预警与个性化推荐。
@@ -39,7 +15,7 @@ RFM 分层	R/F/M 五等分评分 → 8 类细分 → 5 类宏观分层
 行为分档	活跃度分档、频次对比、生命周期 × 活跃热力图
 🔧 1. 数据预处理
 python
-import pandas as pd   以pd方式导入熊猫
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -85,7 +61,7 @@ F_Score：Purchase_Frequency 五等分（1=最低，5=最高）
 
 M_Score：Total_Spending 五等分（1=最低，5=最高）
 
-RFM_Score = R_Score + F_Score + M_ScoreRFM_Score = R_Score
+RFM_Score = R_Score + F_Score + M_Score
 
 4.2 分层映射
 根据 R、F、M 组合 → 8 类细分标签 → 5 类宏观分层：
@@ -180,7 +156,7 @@ matplotlib
 
 python
 plt.rcParams['font.sans-serif'] = ['SimHei']
-plt.rcParams['axes.unicode_minus'] = Falseplt.rcParams['轴。unicode_minus'] = Falseplt.rcParams['轴。unicode_minus‘] = false . rcparams[’轴。unicode_minus'] = False
+plt.rcParams['axes.unicode_minus'] = Falseplt.rcParams['轴。unicode_minus'] = False
 📂 输入 / 输出
 类型	路径	说明
 输入	user_personalized_features.csv	用户基础行为与属性
